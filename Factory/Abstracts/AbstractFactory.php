@@ -16,6 +16,9 @@
 
 namespace Elcodi\Component\Core\Factory\Abstracts;
 
+use Elcodi\Component\Core\Factory\Traits\EntityNamespaceTrait;
+use Elcodi\Component\Translator\Entity\Interfaces\TranslationInterface;
+
 /**
  * Class AbstractFactory
  *
@@ -27,36 +30,7 @@ namespace Elcodi\Component\Core\Factory\Abstracts;
  */
 abstract class AbstractFactory
 {
-    /**
-     * @var string
-     *
-     * Entity namespace
-     */
-    protected $entityNamespace;
-
-    /**
-     * Set Entity Namespace
-     *
-     * @param string $entityNamespace Entity namespace
-     *
-     * @return $this self Object
-     */
-    public function setEntityNamespace($entityNamespace)
-    {
-        $this->entityNamespace = $entityNamespace;
-
-        return $this;
-    }
-
-    /**
-     * Get entity Namespace
-     *
-     * @return string Entity Namespace
-     */
-    public function getEntityNamespace()
-    {
-        return $this->entityNamespace;
-    }
+    use EntityNamespaceTrait;
 
     /**
      * Creates an instance of an entity.
@@ -66,7 +40,7 @@ abstract class AbstractFactory
      * This method must always returns an empty instance of the related Entity
      * and initializes it in a consistent state
      *
-     * @return Object Empty entity
+     * @return TranslationInterface Empty entity
      */
     abstract public function create();
 }
