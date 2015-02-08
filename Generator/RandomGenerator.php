@@ -19,31 +19,12 @@ namespace Elcodi\Component\Core\Generator;
 use Elcodi\Component\Core\Generator\Interfaces\GeneratorInterface;
 
 /**
- * Class Sha1Generator
- *
- * This class is a sha1 string generator.
+ * Class RandomGenerator
  */
-class Sha1Generator implements GeneratorInterface
+class RandomGenerator implements GeneratorInterface
 {
     /**
-     * @var GeneratorInterface
-     *
-     * Generator
-     */
-    protected $generator;
-
-    /**
-     * Construct
-     *
-     * @param GeneratorInterface $generator Generator
-     */
-    public function __construct(GeneratorInterface $generator)
-    {
-        $this->generator = $generator;
-    }
-
-    /**
-     * Generates a random string
+     * Generates a random string with entropy
      *
      * @param string $length Length of generation
      *
@@ -51,6 +32,8 @@ class Sha1Generator implements GeneratorInterface
      */
     public function generate($length = null)
     {
-        return hash("sha1", $this->generator->generate($length));
+        $bits = $length * 8;
+
+        return bin2hex(openssl_random_pseudo_bytes($bits));
     }
 }
